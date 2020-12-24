@@ -11,5 +11,21 @@
 
     <artifactId>infra</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>github.makcon.pokemons</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>

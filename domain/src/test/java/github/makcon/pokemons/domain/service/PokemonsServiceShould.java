@@ -1,7 +1,7 @@
 package github.makcon.pokemons.domain.service;
 
 import github.makcon.pokemons.domain.model.Pokemon;
-import github.makcon.pokemons.domain.port.PokemonRepositoryPort;
+import github.makcon.pokemons.domain.port.PokemonsRepositoryPort;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -25,7 +25,7 @@ class PokemonsServiceShould {
     private PokemonsService service;
 
     @Mock
-    private PokemonRepositoryPort repository;
+    private PokemonsRepositoryPort repository;
 
     @Test
     void request_repository_to_find_most_heaviest_pokemons() {

@@ -4,7 +4,7 @@ import github.makcon.pokemons.domain.model.Pokemon;
 
 import java.util.List;
 
-public interface PokemonRepositoryPort {
+public interface PokemonsRepositoryPort {
 
     List<Pokemon> findOrderedByWeight(int limit);
 
