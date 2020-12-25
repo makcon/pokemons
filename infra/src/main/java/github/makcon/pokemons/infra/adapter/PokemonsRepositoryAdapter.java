@@ -3,12 +3,9 @@ package github.makcon.pokemons.infra.adapter;
 import github.makcon.pokemons.domain.model.Pokemon;
 import github.makcon.pokemons.domain.port.PokemonsRepositoryPort;
 import github.makcon.pokemons.infra.converter.PokemonEntityConverter;
-import github.makcon.pokemons.infra.entity.PokemonEntity;
 import github.makcon.pokemons.infra.entity.PokemonEntity.Field;
-import github.makcon.pokemons.infra.external.PokemonsInitializer;
 import github.makcon.pokemons.infra.repository.PokemonsJpaRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
@@ -23,7 +20,6 @@ public class PokemonsRepositoryAdapter implements PokemonsRepositoryPort {
 
     private final PokemonsJpaRepository jpaRepository;
     private final PokemonEntityConverter converter;
-    private final PokemonsInitializer initializer;
 
     @Override
     public List<Pokemon> findOrderedByWeight(int limit) {
@@ -41,19 +37,9 @@ public class PokemonsRepositoryAdapter implements PokemonsRepositoryPort {
     }
 
     private List<Pokemon> findAndConvert(String field, int limit) {
-        var pokemons = find(field, limit);
-
-        if (pokemons.isEmpty()) {
-            initializer.init();
-            pokemons = find(field, limit);
-        }
-
-        return pokemons.stream()
+        return jpaRepository.findAll(PageRequest.of(0, limit, DESC, field))
+                .stream()
                 .map(converter::toModel)
                 .collect(Collectors.toList());
-    }
-
-    private Page<PokemonEntity> find(String field, int limit) {
-        return jpaRepository.findAll(PageRequest.of(0, limit, DESC, field));
     }
 }
