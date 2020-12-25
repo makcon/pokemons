@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +21,7 @@ public class PokemonsInitializer {
     private final PokemonEntityConverter converter;
     private final PokemonsJpaRepository jpaRepository;
 
-//    @PostConstruct
+    @PostConstruct
     public void init() {
         log.info("Starting to initialize pokemons");
         var offset = 0;

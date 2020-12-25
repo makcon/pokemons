@@ -1,4 +1,4 @@
 pokemons-api:
   base-url: https://pokeapi.co/api/v2/
   results:
-    limit: 50
+    limit: 100

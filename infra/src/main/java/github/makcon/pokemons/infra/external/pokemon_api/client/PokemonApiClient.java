@@ -37,7 +37,7 @@ public class PokemonApiClient {
 
     private <T> CompletableFuture<T> requestGET(String url, Class<T> clazz) {
         var httpRequest = HttpRequest.newBuilder(URI.create(url)).build();
-        log.debug("Requesting: {}", url);
+        log.info("Requesting: {}", url);
 
         return httpClient.sendAsync(httpRequest, BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
