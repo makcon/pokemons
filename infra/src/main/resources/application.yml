@@ -2,3 +2,6 @@ pokemons-api:
   base-url: https://pokeapi.co/api/v2/
   results:
     limit: 100
+  initializer:
+    run-on-startup: true
+    first-batch-only: true

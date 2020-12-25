@@ -5,11 +5,13 @@ import github.makcon.pokemons.infra.entity.PokemonEntity;
 import github.makcon.pokemons.infra.external.pokemon_api.PokemonApiRequestService;
 import github.makcon.pokemons.infra.external.pokemon_api.dto.PokemonApiDto;
 import github.makcon.pokemons.infra.repository.PokemonsJpaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
 import java.util.List;
 
@@ -28,6 +30,24 @@ class PokemonsInitializerShould {
     private PokemonEntityConverter converter;
     @Mock
     private PokemonsJpaRepository jpaRepository;
+
+    @BeforeEach
+    void setUp() {
+        ReflectionTestUtils.setField(initializer, "runOnStartup", true);
+    }
+
+    @Test
+    void do_nothing_if_run_on_startup_is_false() {
+        // given
+        ReflectionTestUtils.setField(initializer, "runOnStartup", false);
+
+        // when
+        initializer.init();
+
+        // then
+        verify(requestService, never()).request(anyInt());
+        verify(jpaRepository, never()).saveAll(anyIterable());
+    }
 
     @Test
     void request_pokemons_api_service_2_times_and_save_entities() {

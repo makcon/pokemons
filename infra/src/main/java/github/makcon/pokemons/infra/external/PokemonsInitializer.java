@@ -6,6 +6,7 @@ import github.makcon.pokemons.infra.external.pokemon_api.PokemonApiRequestServic
 import github.makcon.pokemons.infra.repository.PokemonsJpaRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -21,13 +22,27 @@ public class PokemonsInitializer {
     private final PokemonEntityConverter converter;
     private final PokemonsJpaRepository jpaRepository;
 
+    @Value("${pokemons-api.initializer.run-on-startup}")
+    private boolean runOnStartup;
+    @Value("${pokemons-api.initializer.first-batch-only}")
+    private boolean firstBatchOnly;
+
     @PostConstruct
     public void init() {
+        if (!runOnStartup) {
+            log.info("Skipping pokemons initialization");
+            return;
+        }
+
+        doInit();
+    }
+
+    private void doInit() {
         log.info("Starting to initialize pokemons");
         var offset = 0;
         var entities = fetchAndSave(offset);
 
-        while (!entities.isEmpty()) {
+        while (!firstBatchOnly && !entities.isEmpty()) {
             offset += entities.size();
             entities = fetchAndSave(offset);
         }
