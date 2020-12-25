@@ -20,6 +20,7 @@ public class PokemonEntity {
     @Id
     @GeneratedValue
     private Integer id;
+    private Integer externalId;
     private Integer height;
     private Integer weight;
     private Integer baseExperience;
