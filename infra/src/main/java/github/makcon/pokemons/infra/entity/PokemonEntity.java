@@ -1,18 +1,20 @@
 package github.makcon.pokemons.infra.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.UtilityClass;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.time.Instant;
 
 @Entity
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class PokemonEntity {
 
     @Id
@@ -22,8 +24,6 @@ public class PokemonEntity {
     private Integer weight;
     private Integer baseExperience;
     private String name;
-    @CreatedDate
-    private Instant createdAt;
 
     @UtilityClass
     public static class Field {

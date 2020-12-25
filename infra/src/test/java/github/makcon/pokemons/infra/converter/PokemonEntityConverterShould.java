@@ -1,6 +1,6 @@
 package github.makcon.pokemons.infra.converter;
 
-import github.makcon.pokemons.infra.mother.PokemonMother;
+import github.makcon.pokemons.infra.mother.PokemonEntityMother;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -17,7 +17,7 @@ class PokemonEntityConverterShould {
     @Test
     void convert_to_model() {
         // given
-        var givenEntity = PokemonMother.randomEntity();
+        var givenEntity = PokemonEntityMother.random();
 
         // when
         var model = converter.toModel(givenEntity);
