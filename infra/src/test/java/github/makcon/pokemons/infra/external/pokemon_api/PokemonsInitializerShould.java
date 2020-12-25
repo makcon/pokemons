@@ -1,9 +1,7 @@
-package github.makcon.pokemons.infra.external;
+package github.makcon.pokemons.infra.external.pokemon_api;
 
 import github.makcon.pokemons.infra.converter.PokemonEntityConverter;
 import github.makcon.pokemons.infra.entity.PokemonEntity;
-import github.makcon.pokemons.infra.external.pokemon_api.PokemonApiRequestService;
-import github.makcon.pokemons.infra.external.pokemon_api.PokemonsInitializer;
 import github.makcon.pokemons.infra.external.pokemon_api.dto.PokemonApiDto;
 import github.makcon.pokemons.infra.repository.PokemonsJpaRepository;
 import org.junit.jupiter.api.BeforeEach;
