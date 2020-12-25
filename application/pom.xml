@@ -13,6 +13,19 @@
 
     <dependencies>
         <dependency>
+            <groupId>github.makcon.pokemons</groupId>
+            <artifactId>domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>github.makcon.pokemons</groupId>
+            <artifactId>infra</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>github.makcon.pokemons</groupId>
+            <artifactId>dto</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
