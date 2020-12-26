@@ -41,7 +41,7 @@ public class PokemonApiClient {
 
         return httpClient.sendAsync(httpRequest, BodyHandlers.ofString())
                 .thenApply(HttpResponse::body)
-                .thenApply(it -> deserialize(it, clazz));
+                .thenApplyAsync(it -> deserialize(it, clazz), httpClient.executor().orElseThrow());
     }
 
     private <T> T deserialize(String json, Class<T> clazz) {
