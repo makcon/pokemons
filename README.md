@@ -39,10 +39,14 @@ Note 2: During the startup the service will initialize pokemons by requesting ex
 
 ## How to use the service
 
-1. Open swagger-api ui: `http://localhost:8080/swagger-ui.html`
-2. Here you can see all available endpoints and models and try to execute examples
+1. Using swagger. Open swagger ui: `http://localhost:8080/swagger-ui.html`. Here you can see all available endpoints and models and try to execute examples
+2. Using browser/curl. Here are available endpoints to get pokemons (Note: it's possible to request different size or/and version by passing the parameters `?size=5&version=red`):
+    - `http://localhost:8080/v1/pokemons/most-experienced` - to get 5 most experienced red pokemons
+    - `http://localhost:8080/v1/pokemons/most-heaviest` - to get 5 most heaviest red pokemons
+    - `http://localhost:8080/v1/pokemons/most-highest` - to get 5 most highest red pokemons
 
 ### TODO list
 
 - Pokemon versions stored in DB as separated string but it's not flexible. For example, it would be tricky to filter if we want to find entities by multiple versions. To fix that create a separate table for versions to normalize the structure
 - Handle possible errors, e.q. external api errors, json mapping errors 
+- Add validation, e.q. requested size must be positive
