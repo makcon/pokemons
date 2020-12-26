@@ -17,21 +17,12 @@ public class PokemonApiConfig {
 
     @Bean
     public PokemonApiClient pokemonApiClient(@Value("${pokemons-api.base-url}") String baseUrl,
-                                             ObjectMapper objectMapper,
                                              Executor clientExecutor) {
         return PokemonApiClient.builder()
                 .baseUrl(baseUrl)
-                .objectMapper(objectMapper)
+                .objectMapper(objectMapper())
                 .httpClient(HttpClient.newBuilder().executor(clientExecutor).build())
                 .build();
-    }
-
-    @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper()
-                .findAndRegisterModules()
-                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
-                .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
 
     @Bean
@@ -42,5 +33,12 @@ public class PokemonApiConfig {
         executor.setMaxPoolSize(poolSize);
 
         return executor;
+    }
+
+    private ObjectMapper objectMapper() {
+        return new ObjectMapper()
+                .findAndRegisterModules()
+                .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
+                .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
     }
 }
