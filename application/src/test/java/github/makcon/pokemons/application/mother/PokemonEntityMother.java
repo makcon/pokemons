@@ -11,8 +11,8 @@ import java.util.stream.IntStream;
 @UtilityClass
 public class PokemonEntityMother {
 
-    public PokemonEntity random() {
-        return builder().build();
+    public PokemonEntity randomWithVersion(String version) {
+        return builder().versions(version).build();
     }
 
     public PokemonEntity.PokemonEntityBuilder builder() {

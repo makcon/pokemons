@@ -25,6 +25,10 @@ public class PokemonEntity {
     private Integer weight;
     private Integer baseExperience;
     private String name;
+    /**
+     * FIXME versions stored here as separated string but it's not flexible
+     * for example, it would be tricky to filter if we want to find by multiple versions.
+     */
     private String versions;
 
     @UtilityClass

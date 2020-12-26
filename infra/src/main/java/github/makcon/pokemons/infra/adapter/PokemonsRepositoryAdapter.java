@@ -22,22 +22,28 @@ public class PokemonsRepositoryAdapter implements PokemonsRepositoryPort {
     private final PokemonEntityConverter converter;
 
     @Override
-    public List<Pokemon> findOrderedByWeight(int limit) {
-        return findAndConvert(Field.WEIGHT, limit);
+    public List<Pokemon> findOrderedByWeight(int limit, String version) {
+        return findAndConvert(Field.WEIGHT, limit, version);
     }
 
     @Override
-    public List<Pokemon> findOrderedByHeight(int limit) {
-        return findAndConvert(Field.HEIGHT, limit);
+    public List<Pokemon> findOrderedByHeight(int limit, String version) {
+        return findAndConvert(Field.HEIGHT, limit, version);
     }
 
     @Override
-    public List<Pokemon> findOrderedByBaseExperience(int limit) {
-        return findAndConvert(Field.BASE_EXPERIENCE, limit);
+    public List<Pokemon> findOrderedByBaseExperience(int limit, String version) {
+        return findAndConvert(Field.BASE_EXPERIENCE, limit, version);
     }
 
-    private List<Pokemon> findAndConvert(String field, int limit) {
-        return jpaRepository.findAll(PageRequest.of(0, limit, DESC, field))
+    private List<Pokemon> findAndConvert(String field, int limit, String version) {
+        var pageable = PageRequest.of(0, limit, DESC, field);
+
+        var entities = version == null
+                ? jpaRepository.findAll(pageable)
+                : jpaRepository.findAllByVersionsContaining(pageable, version);
+
+        return entities
                 .stream()
                 .map(converter::toModel)
                 .collect(Collectors.toList());

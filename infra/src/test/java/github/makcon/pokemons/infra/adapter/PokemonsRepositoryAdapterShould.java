@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -26,6 +27,7 @@ import static org.springframework.data.domain.Sort.Direction.DESC;
 class PokemonsRepositoryAdapterShould {
 
     private static final int GIVEN_LIMIT = 1;
+    private static final String GIVEN_VERSION = UUID.randomUUID().toString();
     private static final PokemonEntity FOUND_POKEMON_ENTITY = mock(PokemonEntity.class);
     private static final Pokemon CONVERTED_POKEMON = mock(Pokemon.class);
 
@@ -39,15 +41,31 @@ class PokemonsRepositoryAdapterShould {
 
     @BeforeEach
     void setUp() {
-        when(jpaRepository.findAll(any(Pageable.class)))
-                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
         when(converter.toModel(any())).thenReturn(CONVERTED_POKEMON);
     }
 
     @Test
-    void call_repository_find_by_weight_and_convert_to_model() {
+    void call_repository_find_by_weight_with_version_and_convert_to_model() {
+        // given
+        when(jpaRepository.findAllByVersionsContaining(any(Pageable.class), anyString()))
+                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
+
         // when
-        var pokemons = adapter.findOrderedByWeight(GIVEN_LIMIT);
+        var pokemons = adapter.findOrderedByWeight(GIVEN_LIMIT, GIVEN_VERSION);
+
+        // then
+        verify(jpaRepository).findAllByVersionsContaining(pageable(Field.WEIGHT), GIVEN_VERSION);
+        assertThat(pokemons).isEqualTo(List.of(CONVERTED_POKEMON));
+    }
+
+    @Test
+    void call_repository_find_by_weight_and_convert_to_model() {
+        // given
+        when(jpaRepository.findAll(any(Pageable.class)))
+                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
+
+        // when
+        var pokemons = adapter.findOrderedByWeight(GIVEN_LIMIT, null);
 
         // then
         verify(jpaRepository).findAll(pageable(Field.WEIGHT));
@@ -55,9 +73,27 @@ class PokemonsRepositoryAdapterShould {
     }
 
     @Test
-    void call_repository_find_by_height_and_convert_to_model() {
+    void call_repository_find_by_height_with_version_and_convert_to_model() {
+        // given
+        when(jpaRepository.findAllByVersionsContaining(any(Pageable.class), anyString()))
+                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
+
         // when
-        var pokemons = adapter.findOrderedByHeight(GIVEN_LIMIT);
+        var pokemons = adapter.findOrderedByHeight(GIVEN_LIMIT, GIVEN_VERSION);
+
+        // then
+        verify(jpaRepository).findAllByVersionsContaining(pageable(Field.HEIGHT), GIVEN_VERSION);
+        assertThat(pokemons).isEqualTo(List.of(CONVERTED_POKEMON));
+    }
+
+    @Test
+    void call_repository_find_by_height_and_convert_to_model() {
+        // given
+        when(jpaRepository.findAll(any(Pageable.class)))
+                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
+
+        // when
+        var pokemons = adapter.findOrderedByHeight(GIVEN_LIMIT, null);
 
         // then
         verify(jpaRepository).findAll(pageable(Field.HEIGHT));
@@ -65,9 +101,27 @@ class PokemonsRepositoryAdapterShould {
     }
 
     @Test
-    void call_repository_find_by_base_experience_and_convert_to_model() {
+    void call_repository_find_by_base_experience_with_version_and_convert_to_model() {
+        // given
+        when(jpaRepository.findAllByVersionsContaining(any(Pageable.class), anyString()))
+                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
+
         // when
-        var pokemons = adapter.findOrderedByBaseExperience(GIVEN_LIMIT);
+        var pokemons = adapter.findOrderedByBaseExperience(GIVEN_LIMIT, GIVEN_VERSION);
+
+        // then
+        verify(jpaRepository).findAllByVersionsContaining(pageable(Field.BASE_EXPERIENCE), GIVEN_VERSION);
+        assertThat(pokemons).isEqualTo(List.of(CONVERTED_POKEMON));
+    }
+
+    @Test
+    void call_repository_find_by_base_experience_and_convert_to_model() {
+        // given
+        when(jpaRepository.findAll(any(Pageable.class)))
+                .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
+
+        // when
+        var pokemons = adapter.findOrderedByBaseExperience(GIVEN_LIMIT, null);
 
         // then
         verify(jpaRepository).findAll(pageable(Field.BASE_EXPERIENCE));

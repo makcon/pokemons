@@ -13,15 +13,15 @@ public class PokemonsService {
 
     private final PokemonsRepositoryPort repository;
 
-    public List<Pokemon> findMostHeaviest(int size) {
-        return repository.findOrderedByWeight(size);
+    public List<Pokemon> findMostHeaviest(int size, String version) {
+        return repository.findOrderedByWeight(size, version);
     }
 
-    public List<Pokemon> findMostHighest(int size) {
-        return repository.findOrderedByHeight(size);
+    public List<Pokemon> findMostHighest(int size, String version) {
+        return repository.findOrderedByHeight(size, version);
     }
 
-    public List<Pokemon> findMostExperienced(int size) {
-        return repository.findOrderedByBaseExperience(size);
+    public List<Pokemon> findMostExperienced(int size, String version) {
+        return repository.findOrderedByBaseExperience(size, version);
     }
 }

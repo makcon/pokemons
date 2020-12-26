@@ -19,12 +19,6 @@ public class PokemonApiRequestService {
     @Value("${pokemons-api.results.limit}")
     private int resultsLimit;
 
-    /**
-     * TODO filter
-     * - We only want Pokémons of "red version". You can find this information on the section "game_indices" for each Pokémon:
-     *      - version_name = "red"
-     *      - version_url = "https://pokeapi.co/api/v2/version/1/"
-     */
     public List<PokemonApiDto> request(int offset) {
         return client.fetchPokemons(offset, resultsLimit)
                 .join()

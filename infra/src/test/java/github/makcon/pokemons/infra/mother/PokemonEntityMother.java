@@ -11,20 +11,38 @@ import java.util.stream.IntStream;
 @UtilityClass
 public class PokemonEntityMother {
 
+    public static String DEFAULT_VERSION = randomString();
+
     public PokemonEntity random() {
         return builder().build();
     }
 
     public PokemonEntity withWeight(int weight) {
-        return builder().weight(weight).build();
+        return builder()
+                .weight(weight)
+                .versions(DEFAULT_VERSION)
+                .build();
     }
 
     public PokemonEntity withHeight(int height) {
-        return builder().height(height).build();
+        return builder()
+                .height(height)
+                .versions(DEFAULT_VERSION)
+                .build();
     }
 
     public PokemonEntity withBaseExperience(int baseExperience) {
-        return builder().baseExperience(baseExperience).build();
+        return builder()
+                .baseExperience(baseExperience)
+                .versions(DEFAULT_VERSION)
+                .build();
+    }
+
+    public PokemonEntity withSameHeightAndVersions(String... versions) {
+        return builder()
+                .height(1)
+                .versions(String.join(";", versions))
+                .build();
     }
 
     public PokemonEntity.PokemonEntityBuilder builder() {

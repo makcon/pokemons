@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.anyInt;
@@ -19,6 +20,7 @@ import static org.mockito.Mockito.*;
 class PokemonsServiceShould {
 
     private static final int GIVEN_SIZE = new Random().nextInt();
+    private static final String GIVEN_VERSION = UUID.randomUUID().toString();
     private static final List<Pokemon> FOUND_POKEMONS = List.of(mock(Pokemon.class));
 
     @InjectMocks
@@ -30,39 +32,39 @@ class PokemonsServiceShould {
     @Test
     void request_repository_to_find_most_heaviest_pokemons() {
         // given
-        when(repository.findOrderedByWeight(anyInt())).thenReturn(FOUND_POKEMONS);
+        when(repository.findOrderedByWeight(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
 
         // when
-        var pokemons = service.findMostHeaviest(GIVEN_SIZE);
+        var pokemons = service.findMostHeaviest(GIVEN_SIZE, GIVEN_VERSION);
 
         // then
-        verify(repository).findOrderedByWeight(GIVEN_SIZE);
+        verify(repository).findOrderedByWeight(GIVEN_SIZE, GIVEN_VERSION);
         assertThat(pokemons).isEqualTo(FOUND_POKEMONS);
     }
 
     @Test
     void request_repository_to_find_most_highest_pokemons() {
         // given
-        when(repository.findOrderedByHeight(anyInt())).thenReturn(FOUND_POKEMONS);
+        when(repository.findOrderedByHeight(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
 
         // when
-        var pokemons = service.findMostHighest(GIVEN_SIZE);
+        var pokemons = service.findMostHighest(GIVEN_SIZE, GIVEN_VERSION);
 
         // then
-        verify(repository).findOrderedByHeight(GIVEN_SIZE);
+        verify(repository).findOrderedByHeight(GIVEN_SIZE, GIVEN_VERSION);
         assertThat(pokemons).isEqualTo(FOUND_POKEMONS);
     }
 
     @Test
     void request_repository_to_find_most_experienced_pokemons() {
         // given
-        when(repository.findOrderedByBaseExperience(anyInt())).thenReturn(FOUND_POKEMONS);
+        when(repository.findOrderedByBaseExperience(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
 
         // when
-        var pokemons = service.findMostExperienced(GIVEN_SIZE);
+        var pokemons = service.findMostExperienced(GIVEN_SIZE, GIVEN_VERSION);
 
         // then
-        verify(repository).findOrderedByBaseExperience(GIVEN_SIZE);
+        verify(repository).findOrderedByBaseExperience(GIVEN_SIZE, GIVEN_VERSION);
         assertThat(pokemons).isEqualTo(FOUND_POKEMONS);
     }
 }

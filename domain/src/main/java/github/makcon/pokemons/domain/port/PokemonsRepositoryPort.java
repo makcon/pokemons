@@ -6,9 +6,9 @@ import java.util.List;
 
 public interface PokemonsRepositoryPort {
 
-    List<Pokemon> findOrderedByWeight(int limit);
+    List<Pokemon> findOrderedByWeight(int limit, String version);
 
-    List<Pokemon> findOrderedByHeight(int limit);
+    List<Pokemon> findOrderedByHeight(int limit, String version);
 
-    List<Pokemon> findOrderedByBaseExperience(int limit);
+    List<Pokemon> findOrderedByBaseExperience(int limit, String version);
 }
