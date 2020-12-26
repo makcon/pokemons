@@ -5,6 +5,8 @@ import lombok.experimental.UtilityClass;
 
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @UtilityClass
 public class PokemonEntityMother {
@@ -31,10 +33,17 @@ public class PokemonEntityMother {
                 .name(randomString())
                 .height(randomInt())
                 .weight(randomInt())
-                .baseExperience(randomInt());
+                .baseExperience(randomInt())
+                .versions(versions());
     }
 
-    private static int randomInt() {
+    private String versions() {
+        return IntStream.rangeClosed(1, new Random().nextInt(3) + 1)
+                .mapToObj(it -> randomString())
+                .collect(Collectors.joining(";"));
+    }
+
+    private int randomInt() {
         return new Random().nextInt();
     }
 

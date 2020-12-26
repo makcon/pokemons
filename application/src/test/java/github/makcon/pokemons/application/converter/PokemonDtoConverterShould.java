@@ -32,5 +32,6 @@ class PokemonDtoConverterShould {
         assertThat(dto.getWeight()).isEqualTo(givenPokemon.getWeight());
         assertThat(dto.getBaseExperience()).isEqualTo(givenPokemon.getBaseExperience());
         assertThat(dto.getName()).isEqualTo(givenPokemon.getName());
+        assertThat(dto.getVersions()).isEqualTo(givenPokemon.getVersions());
     }
 }

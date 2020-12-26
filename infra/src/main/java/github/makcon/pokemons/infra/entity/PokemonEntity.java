@@ -25,6 +25,7 @@ public class PokemonEntity {
     private Integer weight;
     private Integer baseExperience;
     private String name;
+    private String versions;
 
     @UtilityClass
     public static class Field {

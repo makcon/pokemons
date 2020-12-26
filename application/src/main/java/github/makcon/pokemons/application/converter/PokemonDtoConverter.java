@@ -23,6 +23,7 @@ public class PokemonDtoConverter {
                 .height(pokemon.getHeight())
                 .baseExperience(pokemon.getBaseExperience())
                 .name(pokemon.getName())
+                .versions(pokemon.getVersions())
                 .build();
     }
 }

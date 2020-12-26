@@ -7,10 +7,16 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(MockitoExtension.class)
 class PokemonEntityConverterShould {
+
+    private static final String DELIMITER = ";";
 
     @InjectMocks
     private PokemonEntityConverter converter;
@@ -29,6 +35,9 @@ class PokemonEntityConverterShould {
         assertThat(model.getWeight()).isEqualTo(givenEntity.getWeight());
         assertThat(model.getBaseExperience()).isEqualTo(givenEntity.getBaseExperience());
         assertThat(model.getName()).isEqualTo(givenEntity.getName());
+        var versionNames = Stream.of(givenEntity.getVersions().split(DELIMITER))
+                .collect(Collectors.toList());
+        assertThat(model.getVersions()).isEqualTo(versionNames);
     }
 
     @Test
@@ -46,5 +55,9 @@ class PokemonEntityConverterShould {
         assertThat(entity.getWeight()).isEqualTo(givenDto.getWeight());
         assertThat(entity.getBaseExperience()).isEqualTo(givenDto.getBaseExperience());
         assertThat(entity.getName()).isEqualTo(givenDto.getName());
+        var versionNames = givenDto.getGameIndices().stream()
+                .map(it -> it.getVersion().getName())
+                .collect(Collectors.joining(DELIMITER));
+        assertThat(entity.getVersions()).isEqualTo(versionNames);
     }
 }

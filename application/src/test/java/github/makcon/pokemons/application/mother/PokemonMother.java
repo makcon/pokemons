@@ -3,8 +3,11 @@ package github.makcon.pokemons.application.mother;
 import github.makcon.pokemons.domain.model.Pokemon;
 import lombok.experimental.UtilityClass;
 
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 @UtilityClass
 public class PokemonMother {
@@ -19,10 +22,17 @@ public class PokemonMother {
                 .name(randomString())
                 .height(randomInt())
                 .weight(randomInt())
-                .baseExperience(randomInt());
+                .baseExperience(randomInt())
+                .versions(versions());
     }
 
-    private static int randomInt() {
+    private List<String> versions() {
+        return IntStream.rangeClosed(1, new Random().nextInt(3) + 1)
+                .mapToObj(it -> randomString())
+                .collect(Collectors.toList());
+    }
+
+    private int randomInt() {
         return new Random().nextInt();
     }
 
