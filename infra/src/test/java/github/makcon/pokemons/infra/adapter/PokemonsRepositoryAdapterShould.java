@@ -51,7 +51,7 @@ class PokemonsRepositoryAdapterShould {
                 .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
 
         // when
-        var pokemons = adapter.findOrderedByWeight(GIVEN_LIMIT, GIVEN_VERSION);
+        var pokemons = adapter.findTopByWeight(GIVEN_LIMIT, GIVEN_VERSION);
 
         // then
         verify(jpaRepository).findAllByVersionsContaining(pageable(Field.WEIGHT), GIVEN_VERSION);
@@ -65,7 +65,7 @@ class PokemonsRepositoryAdapterShould {
                 .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
 
         // when
-        var pokemons = adapter.findOrderedByWeight(GIVEN_LIMIT, null);
+        var pokemons = adapter.findTopByWeight(GIVEN_LIMIT, null);
 
         // then
         verify(jpaRepository).findAll(pageable(Field.WEIGHT));
@@ -79,7 +79,7 @@ class PokemonsRepositoryAdapterShould {
                 .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
 
         // when
-        var pokemons = adapter.findOrderedByHeight(GIVEN_LIMIT, GIVEN_VERSION);
+        var pokemons = adapter.findTopByHeight(GIVEN_LIMIT, GIVEN_VERSION);
 
         // then
         verify(jpaRepository).findAllByVersionsContaining(pageable(Field.HEIGHT), GIVEN_VERSION);
@@ -93,7 +93,7 @@ class PokemonsRepositoryAdapterShould {
                 .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
 
         // when
-        var pokemons = adapter.findOrderedByHeight(GIVEN_LIMIT, null);
+        var pokemons = adapter.findTopByHeight(GIVEN_LIMIT, null);
 
         // then
         verify(jpaRepository).findAll(pageable(Field.HEIGHT));
@@ -107,7 +107,7 @@ class PokemonsRepositoryAdapterShould {
                 .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
 
         // when
-        var pokemons = adapter.findOrderedByBaseExperience(GIVEN_LIMIT, GIVEN_VERSION);
+        var pokemons = adapter.findTopByBaseExperience(GIVEN_LIMIT, GIVEN_VERSION);
 
         // then
         verify(jpaRepository).findAllByVersionsContaining(pageable(Field.BASE_EXPERIENCE), GIVEN_VERSION);
@@ -121,7 +121,7 @@ class PokemonsRepositoryAdapterShould {
                 .thenReturn(new PageImpl<>(List.of(FOUND_POKEMON_ENTITY)));
 
         // when
-        var pokemons = adapter.findOrderedByBaseExperience(GIVEN_LIMIT, null);
+        var pokemons = adapter.findTopByBaseExperience(GIVEN_LIMIT, null);
 
         // then
         verify(jpaRepository).findAll(pageable(Field.BASE_EXPERIENCE));

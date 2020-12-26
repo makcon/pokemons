@@ -22,17 +22,17 @@ public class PokemonsRepositoryAdapter implements PokemonsRepositoryPort {
     private final PokemonEntityConverter converter;
 
     @Override
-    public List<Pokemon> findOrderedByWeight(int limit, String version) {
+    public List<Pokemon> findTopByWeight(int limit, String version) {
         return findAndConvert(Field.WEIGHT, limit, version);
     }
 
     @Override
-    public List<Pokemon> findOrderedByHeight(int limit, String version) {
+    public List<Pokemon> findTopByHeight(int limit, String version) {
         return findAndConvert(Field.HEIGHT, limit, version);
     }
 
     @Override
-    public List<Pokemon> findOrderedByBaseExperience(int limit, String version) {
+    public List<Pokemon> findTopByBaseExperience(int limit, String version) {
         return findAndConvert(Field.BASE_EXPERIENCE, limit, version);
     }
 

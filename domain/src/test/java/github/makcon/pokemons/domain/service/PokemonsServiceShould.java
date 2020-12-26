@@ -32,39 +32,39 @@ class PokemonsServiceShould {
     @Test
     void request_repository_to_find_most_heaviest_pokemons() {
         // given
-        when(repository.findOrderedByWeight(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
+        when(repository.findTopByWeight(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
 
         // when
         var pokemons = service.findMostHeaviest(GIVEN_SIZE, GIVEN_VERSION);
 
         // then
-        verify(repository).findOrderedByWeight(GIVEN_SIZE, GIVEN_VERSION);
+        verify(repository).findTopByWeight(GIVEN_SIZE, GIVEN_VERSION);
         assertThat(pokemons).isEqualTo(FOUND_POKEMONS);
     }
 
     @Test
     void request_repository_to_find_most_highest_pokemons() {
         // given
-        when(repository.findOrderedByHeight(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
+        when(repository.findTopByHeight(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
 
         // when
         var pokemons = service.findMostHighest(GIVEN_SIZE, GIVEN_VERSION);
 
         // then
-        verify(repository).findOrderedByHeight(GIVEN_SIZE, GIVEN_VERSION);
+        verify(repository).findTopByHeight(GIVEN_SIZE, GIVEN_VERSION);
         assertThat(pokemons).isEqualTo(FOUND_POKEMONS);
     }
 
     @Test
     void request_repository_to_find_most_experienced_pokemons() {
         // given
-        when(repository.findOrderedByBaseExperience(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
+        when(repository.findTopByBaseExperience(anyInt(), anyString())).thenReturn(FOUND_POKEMONS);
 
         // when
         var pokemons = service.findMostExperienced(GIVEN_SIZE, GIVEN_VERSION);
 
         // then
-        verify(repository).findOrderedByBaseExperience(GIVEN_SIZE, GIVEN_VERSION);
+        verify(repository).findTopByBaseExperience(GIVEN_SIZE, GIVEN_VERSION);
         assertThat(pokemons).isEqualTo(FOUND_POKEMONS);
     }
 }
