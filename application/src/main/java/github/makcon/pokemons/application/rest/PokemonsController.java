@@ -3,12 +3,14 @@ package github.makcon.pokemons.application.rest;
 import github.makcon.pokemons.application.converter.PokemonDtoConverter;
 import github.makcon.pokemons.domain.service.PokemonsService;
 import github.makcon.pokemons.dto.v1.PokemonV1;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Api
 @Slf4j
 @RestController
 @RequestMapping("/v1/pokemons")
